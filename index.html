@@ -11,6 +11,7 @@
             --muted: #a0a0a0;
             --accent: #8b0000;
             --border: #242424;
+            --card-bg: #181818;
         }
 
         * {
@@ -123,6 +124,9 @@
         }
 
         .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             color: var(--muted);
             text-decoration: none;
             font-size: 0.85rem;
@@ -131,6 +135,18 @@
 
         .social-links a:hover {
             color: var(--accent);
+        }
+
+        .social-icon {
+            width: 18px;
+            height: 18px;
+            filter: invert(1);
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .social-links a:hover .social-icon {
+            opacity: 1;
         }
 
         /* Botão Minimalista */
@@ -173,17 +189,32 @@
             margin-top: 1rem;
         }
 
-        /* Habilidades */
+        /* Habilidades (Grid lado a lado com estilo de cartões) */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-col {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: border-color 0.2s;
+        }
+
+        .skill-col:hover {
+            border-color: var(--accent);
         }
 
         .skill-col h3 {
             color: var(--text);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .skill-col ul {
@@ -193,23 +224,11 @@
         }
 
         .skill-col li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Kali Linux Inline */
-        .kali-inline {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2.5rem;
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-
-        .kali-logo {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
+        .skill-col li:last-child {
+            margin-bottom: 0;
         }
 
         /* Projetos */
@@ -226,28 +245,6 @@
             color: var(--muted);
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
-        }
-
-        /* Experiência */
-        .exp-item {
-            margin-bottom: 2rem;
-        }
-
-        .exp-item h3 {
-            font-size: 1rem;
-            color: var(--text);
-        }
-
-        .exp-item span.company {
-            font-size: 0.85rem;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
-        .exp-item p {
-            color: var(--muted);
-            font-size: 0.9rem;
         }
 
         /* Certificações */
@@ -321,6 +318,9 @@
                 min-height: 70vh;
                 padding-top: 70px;
             }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -333,7 +333,6 @@
             <a href="#about">sobre</a>
             <a href="#skills">habilidades</a>
             <a href="#projects">projetos</a>
-            <a href="#experience">experiência</a>
             <a href="#certifications">certificações</a>
             <a href="#contact">contato</a>
         </nav>
@@ -347,8 +346,14 @@
             <a href="#projects" class="btn">ver projetos &darr;</a>
 
             <div class="social-links">
-                <a href="https://github.com/betooxrr" target="_blank">github.com/betooxrr</a>
-                <a href="https://www.instagram.com/noxvi_x?stkn=NTMzNXZpd3l2M2xi" target="_blank">instagram</a>
+                <a href="https://github.com/betooxrr" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/256/25/25231.png" alt="GitHub" class="social-icon">
+                    github.com/betooxrr
+                </a>
+                <a href="https://www.instagram.com/noxvi_x?stkn=NTMzNXZpd3l2M2xi" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968776.png" alt="Instagram" class="social-icon">
+                    instagram
+                </a>
             </div>
         </section>
 
@@ -363,6 +368,7 @@
         <section id="skills">
             <h2 class="section-title">Habilidades</h2>
             <div class="skills-grid">
+                <!-- Div Ofensiva -->
                 <div class="skill-col">
                     <h3>Ofensiva</h3>
                     <ul>
@@ -371,6 +377,7 @@
                         <li>Exploit Research</li>
                     </ul>
                 </div>
+                <!-- Div Defensiva -->
                 <div class="skill-col">
                     <h3>Defensiva</h3>
                     <ul>
@@ -379,20 +386,6 @@
                         <li>Hardening</li>
                     </ul>
                 </div>
-                <div class="skill-col">
-                    <h3>Ferramentas</h3>
-                    <ul>
-                        <li>Burp Suite / Nmap</li>
-                        <li>Metasploit / Wireshark</li>
-                        <li>Python / Bash</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Kali Linux Logo Customizada -->
-            <div class="kali-inline">
-                <img class="kali-logo" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kali-linux.svg" alt="Kali Linux Logo">
-                <span>Ambiente base para pentest: Kali Linux.</span>
             </div>
         </section>
 
@@ -403,16 +396,6 @@
                 <h3>InstaSecc</h3>
                 <p>Repositório de segurança focado em ferramentas, automações e testes práticos de pentest.</p>
                 <a href="https://github.com/betooxrr/InstaSecc" target="_blank" class="btn">github.com/betooxrr/InstaSecc &rarr;</a>
-            </div>
-        </section>
-
-        <!-- Experiência -->
-        <section id="experience">
-            <h2 class="section-title">Experiência & CTFs</h2>
-            <div class="exp-item">
-                <h3>Pesquisador de Segurança Independente</h3>
-                <span class="company">Projetos Open Source & Labs (2025 - Presente)</span>
-                <p>Desenvolvimento de ferramentas de automação em Python para reconhecimento (recon) e participação ativa em plataformas de laboratórios focados em vulnerabilidades web e de rede.</p>
             </div>
         </section>
 
@@ -476,4 +459,4 @@
     </script>
 
 </body>
-    </html>
+</html>
