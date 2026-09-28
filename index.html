@@ -9,7 +9,7 @@
             --bg: #121212;
             --text: #ffffff;
             --muted: #a0a0a0;
-            --accent: #8b0000; /* Vermelho Vinho */
+            --accent: #8b0000;
             --border: #242424;
         }
 
@@ -73,7 +73,8 @@
         }
 
         section {
-            padding: 5rem 0;
+            padding: 3rem 0;
+            scroll-margin-top: 80px;
             border-bottom: 1px solid var(--border);
             opacity: 0;
             transform: translateY(20px);
@@ -87,7 +88,8 @@
 
         /* Hero */
         .hero {
-            height: 100vh;
+            min-height: 85vh;
+            padding-top: 80px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -167,6 +169,10 @@
             max-width: 700px;
         }
 
+        .about p + p {
+            margin-top: 1rem;
+        }
+
         /* Habilidades */
         .skills-grid {
             display: grid;
@@ -195,7 +201,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-top: 3rem;
+            margin-top: 2.5rem;
             color: var(--muted);
             font-size: 0.9rem;
         }
@@ -288,7 +294,7 @@
 
         /* Footer */
         footer {
-            padding: 4rem 10%;
+            padding: 2rem 10%;
             color: var(--muted);
             font-size: 0.8rem;
             max-width: 900px;
@@ -307,6 +313,13 @@
             }
             main {
                 padding: 0 5%;
+            }
+            section {
+                padding: 2rem 0;
+            }
+            .hero {
+                min-height: 70vh;
+                padding-top: 70px;
             }
         }
     </style>
@@ -332,7 +345,7 @@
             <h1>PORTFÓLIO <span>/ CIBERSEGURANÇA</span></h1>
             <p>Análise de vulnerabilidades &amp; pentest ofensivo/defensivo.</p>
             <a href="#projects" class="btn">ver projetos &darr;</a>
-            
+
             <div class="social-links">
                 <a href="https://github.com/betooxrr" target="_blank">github.com/betooxrr</a>
                 <a href="https://www.instagram.com/noxvi_x?stkn=NTMzNXZpd3l2M2xi" target="_blank">instagram</a>
@@ -342,9 +355,8 @@
         <!-- Sobre -->
         <section id="about" class="about">
             <h2 class="section-title">Sobre</h2>
-            <p>Olá! Meu nome é Betto, sou um jovem apaixonado por programação, hacking e tecnologia. Atualmente, atuo de forma independente na área de cibersegurança.
-
-Tenho 19 anos e estou há quase um ano me aprofundando no mundo da tecnologia, sempre buscando aprender, desenvolver novas habilidades e explorar os desafios da área de segurança da informação.</p>
+            <p>Olá! Meu nome é Betto, sou um jovem apaixonado por programação, hacking e tecnologia. Atualmente, atuo de forma independente na área de cibersegurança.</p>
+            <p>Tenho 19 anos e estou há quase um ano me aprofundando no mundo da tecnologia, sempre buscando aprender, desenvolver novas habilidades e explorar os desafios da área de segurança da informação.</p>
         </section>
 
         <!-- Habilidades -->
@@ -448,7 +460,7 @@ Tenho 19 anos e estou há quase um ano me aprofundando no mundo da tecnologia, s
 
         // Efeito de revelação (Fade-in) nas seções ao rolar a página
         const sections = document.querySelectorAll('section:not(.hero)');
-        
+
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -462,5 +474,6 @@ Tenho 19 anos e estou há quase um ano me aprofundando no mundo da tecnologia, s
             observer.observe(section);
         });
     </script>
+
 </body>
-</html>
+    </html>
