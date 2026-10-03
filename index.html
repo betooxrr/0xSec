@@ -19,7 +19,11 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
@@ -75,14 +79,15 @@
 
         section {
             padding: 3rem 0;
-            scroll-margin-top: 80px;
             border-bottom: 1px solid var(--border);
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        section.visible {
+        /* Classe para exibir as seções com animação */
+        section.visible,
+        section.no-js {
             opacity: 1;
             transform: translateY(0);
         }
@@ -159,9 +164,8 @@
             padding-bottom: 2px;
             transition: opacity 0.2s;
             background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
+            border: none;
+            border-bottom: 1px solid var(--accent);
             cursor: pointer;
         }
 
@@ -189,10 +193,10 @@
             margin-top: 1rem;
         }
 
-        /* Habilidades (Grid lado a lado com estilo de cartões) */
+        /* Habilidades */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
 
@@ -248,17 +252,40 @@
         }
 
         /* Certificações */
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
         .cert-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             color: var(--muted);
             font-size: 0.9rem;
             padding: 0.8rem 0;
             border-bottom: 1px solid var(--border);
         }
 
-        .cert-row span:first-child {
+        .cert-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-name {
             color: var(--text);
+            font-weight: bold;
+        }
+
+        .cert-institution {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .cert-status {
+            font-size: 0.85rem;
+            color: var(--accent);
         }
 
         /* Contato */
@@ -285,7 +312,7 @@
         #feedback-msg {
             margin-top: 0.8rem;
             font-size: 0.8rem;
-            color: var(--accent);
+            color: #4caf50;
             display: none;
         }
 
@@ -299,7 +326,7 @@
             text-align: center;
         }
 
-        /* Responsividade para telas menores */
+        /* Responsividade */
         @media (max-width: 768px) {
             header {
                 padding: 1rem 5%;
@@ -318,8 +345,10 @@
                 min-height: 70vh;
                 padding-top: 70px;
             }
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .cert-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
             }
         }
     </style>
@@ -346,11 +375,11 @@
             <a href="#projects" class="btn">ver projetos &darr;</a>
 
             <div class="social-links">
-                <a href="https://github.com/betooxrr" target="_blank">
+                <a href="https://github.com/betooxrr" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn-icons-png.flaticon.com/256/25/25231.png" alt="GitHub" class="social-icon">
                     Github
                 </a>
-                <a href="https://www.instagram.com/noxvi_x?stkn=NTMzNXZpd3l2M2xi" target="_blank">
+                <a href="https://www.instagram.com/noxvi_x?stkn=NTMzNXZpd3l2M2xi" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968776.png" alt="Instagram" class="social-icon">
                     Instagram
                 </a>
@@ -368,7 +397,6 @@
         <section id="skills">
             <h2 class="section-title">Habilidades</h2>
             <div class="skills-grid">
-                <!-- Div Ofensiva -->
                 <div class="skill-col">
                     <h3>Ofensiva</h3>
                     <ul>
@@ -386,17 +414,28 @@
             <div class="project-item">
                 <h3>InstaSecc</h3>
                 <p>Repositório de segurança para phishing em páginas do Instagram.</p>
-                <a href="https://github.com/betooxrr/InstaSecc" target="_blank" class="btn">github.com/betooxrr/InstaSecc &rarr;</a>
+                <a href="https://github.com/betooxrr/InstaSecc" target="_blank" rel="noopener noreferrer" class="btn">github.com/betooxrr/InstaSecc &rarr;</a>
             </div>
         </section>
 
         <!-- Certificações -->
         <section id="certifications">
             <h2 class="section-title">Certificações</h2>
-            <div class="cert-row">
-                <span>Cibersegurança — XPsec Academy</span>
-                <span>Cibersegurança - Solyd Offensive Security</span>
-                <span>Concluído</span>
+            <div class="cert-list">
+                <div class="cert-row">
+                    <div class="cert-info">
+                        <span class="cert-name">Cibersegurança</span>
+                        <span class="cert-institution">XPsec Academy</span>
+                    </div>
+                    <span class="cert-status">Concluído</span>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-info">
+                        <span class="cert-name">Cibersegurança</span>
+                        <span class="cert-institution">Solyd Offensive Security</span>
+                    </div>
+                    <span class="cert-status">Concluído</span>
+                </div>
             </div>
         </section>
 
@@ -417,37 +456,52 @@
         <p>0xSEC // 2026</p>
     </footer>
 
-    <!-- JavaScript para Animações e Copiar E-mail -->
+    <!-- JavaScript -->
     <script>
-        // Copiar e-mail interativo
+        // Copiar e-mail para a área de transferência
         document.getElementById('copyEmailBtn').addEventListener('click', function() {
             const email = 'realaliarhacker@proton.me';
-            navigator.clipboard.writeText(email).then(() => {
-                const feedback = document.getElementById('feedback-msg');
-                feedback.style.display = 'block';
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                }, 3000);
-            }).catch(err => {
-                console.error('Erro ao copiar e-mail: ', err);
-            });
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(showFeedback);
+            } else {
+                // Fallback para navegadores sem suporte
+                const tempInput = document.createElement('input');
+                tempInput.value = email;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showFeedback();
+            }
         });
 
-        // Efeito de revelação (Fade-in) nas seções ao rolar a página
+        function showFeedback() {
+            const feedback = document.getElementById('feedback-msg');
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 3000);
+        }
+
+        // Animação de revelação de seções (IntersectionObserver)
         const sections = document.querySelectorAll('section:not(.hero)');
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+            sections.forEach(section => observer.observe(section));
+        } else {
+            // Fallback caso IntersectionObserver não seja suportado
+            sections.forEach(section => section.classList.add('visible'));
+        }
     </script>
 
 </body>
